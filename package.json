@@ -1,0 +1,51 @@
+{
+  "name": "hasaki-test",
+  "productName": "hasaki-test",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "watch": "nodemon --exec electron .",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\"",
+    "dist": "electron-builder"
+  },
+  "repository":"https://github.com/tranvancu185/electron-hasaki-app",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "build": {
+    "appID": "hasaki.autoupdater",
+    "productName": "Hasaki",
+    "win":{
+      "target": "nsis"
+    },
+    "directories":{
+      "output": "dist"
+    }
+  },
+  "keywords": [],
+  "author": {
+    "name": "quytp",
+    "email": "quytp@hasaki.vn"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron-builder": "^23.6.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^5.3.0",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "electron": "22.0.0"
+  }
+}
