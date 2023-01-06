@@ -1,37 +1,134 @@
 {
-  "name": "electron-app",
-  "version": "1.0.0",
-  "description": "My test electron app",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon --exec electron .",
-    "start": "electron .",
-    "dist": "electron-builder"
+  "name": "hasaki-inside-apppos",
+  "version": "1.0.8",
+  "homepage": "./",
+  "main": "./electron/main.js",
+  "author": {
+    "email": "chind@hasaki.vn",
+    "name": "Nguyen Dac Chi"
   },
-  "repository": "https://github.com/cyrilgupta/electron-autoupdater",
-  "publish": {
-    "provider": "github",
-    "releaseType": "release"
-  },
-  "build": {
-    "appId": "com.coderjeet.autoupdater",
-    "productName": "Autoupdater app",
-    "win": {
-      "target": "nsis"
-    },
-    "directories": {
-      "output": "dist"
-    }
-  },
-  "author": "CoderJeet",
-  "license": "ISC",
-  "devDependencies": {
-    "electron": "^19.0.9",
-    "electron-builder": "^23.6.0",
-    "nodemon": "^2.0.19"
-  },
+  "description": "Hasaki Inside App POS",
   "dependencies": {
-    "electron-updater": "^5.3.0"
+    "@ant-design/icons": "^4.3.0",
+    "@createnextapp/react-barcode": "^1.1.1",
+    "@emotion/css": "^11.1.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "@hookform/resolvers": "^1.3.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "adminlte-reactjs": "^1.0.6",
+    "antd": "^4.9.4",
+    "axios": "^0.21.0",
+    "connected-react-router": "^6.8.0",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.10.4",
+    "electron-is-dev": "^1.2.0",
+    "electron-updater": "^4.3.8",
+    "history": "^4.10.1",
+    "i18next": "^19.8.4",
+    "is-reachable": "^5.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "prop-types": "^15.7.2",
+    "qrcode.react": "^3.0.2",
+    "query-string": "^6.13.7",
+    "react": "^17.0.1",
+    "react-barcode": "^1.4.0",
+    "react-csv": "^2.0.3",
+    "react-dom": "^17.0.1",
+    "react-hook-form": "^6.14.2",
+    "react-hotkeys-hook": "^3.0.3",
+    "react-i18next": "^11.8.5",
+    "react-idle-timer": "^4.5.6",
+    "react-lock-screen": "^0.1.1",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
+    "react-to-print": "^2.14.7",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.7",
+    "redux-saga": "^1.1.3",
+    "sass": "^1.51.0",
+    "sequelize": "^6.3.5",
+    "socket.io-client": "^2.4.0",
+    "sqlite3": "^5.0.0",
+    "styled-components": "^5.2.1",
+    "web-vitals": "^0.2.4",
+    "webpack": "^4.3.0",
+    "yup": "^0.32.8"
+  },
+  "scripts": {
+    "appInstall": "npm install --legacy-peer-deps",
+    "dev": "concurrently \"cross-env BROWSER=none PORT=6006 react-scripts start\" \"wait-on http://localhost:6006 && nodemon --exec electron .\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@fullcalendar)/\"",
+    "pack": "electron-builder --dir",
+    "builder": "electron-builder --windows",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --windows",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "repository": "https://github.com/tranvancu185/electron-autoupdater",
+  "publish":
+    {
+      "provider": "github",
+      "releaseType": "release",
+      "url": "https://pos.hasaki.vn/"
+    }
+  ,
+  "build": {
+    "productName": "Hasaki Inside POS",
+    "appId": "com.electron.InsidePOS",
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage"
+        }
+      ]
+    },
+    "files": [
+      "./build/**/*",
+      "./electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "extends": null
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "electron": "^19.0.6",
+    "electron-builder": "^22.9.1",
+    "electron-devtools-installer": "^3.1.1",
+    "nodemon": "^2.0.7",
+    "redux-mock-store": "^1.5.4",
+    "wait-on": "^5.2.0"
   }
 }
